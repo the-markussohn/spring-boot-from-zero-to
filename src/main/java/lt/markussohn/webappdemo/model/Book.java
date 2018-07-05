@@ -2,6 +2,8 @@ package lt.markussohn.webappdemo.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,13 +16,16 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NonNull
     private String title;
-    private String publisher;
+    @ManyToOne
+    private Publisher publisher;
 
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
