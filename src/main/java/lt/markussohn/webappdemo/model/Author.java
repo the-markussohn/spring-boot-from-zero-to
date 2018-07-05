@@ -23,8 +23,12 @@ public class Author {
     private String name;
     @NonNull
     private String lastName;
-
-    @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Book> books = new HashSet<>();
+
 
 }

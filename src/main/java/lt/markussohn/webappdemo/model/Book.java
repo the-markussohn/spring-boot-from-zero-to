@@ -1,9 +1,6 @@
 package lt.markussohn.webappdemo.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -26,9 +23,8 @@ public class Book {
     private String title;
     @ManyToOne
     private Publisher publisher;
-
-    @ManyToMany
-    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
-    inverseJoinColumns = @JoinColumn(name = "author_id"))
+    @ManyToMany(mappedBy = "books")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Author> authors = new HashSet<>();
 }
